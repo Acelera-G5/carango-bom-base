@@ -26,8 +26,8 @@ export default function UserList() {
   }
 
   async function fetchUsers() {
-    const users = await UserService.getAll();
-    setUsers(users);
+    const usersLoaded = await UserService.getAll();
+    setUsers(usersLoaded);
   }
 
   useEffect(() => fetchUsers(), []);

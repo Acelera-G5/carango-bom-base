@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const useForm = (validate, callback) => {
   const [values, setValues] = useState({});
@@ -12,7 +12,6 @@ const useForm = (validate, callback) => {
   }, [errors, callback, isSubmitting]);
 
   const handleChange = (e) => {
-    // e.persist();
     setValues({
       ...values,
       [e.target.name]: e.target.value,
