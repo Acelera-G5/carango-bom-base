@@ -4,7 +4,7 @@ import UserService from '../../services/UserService';
 
 import Table from '../../components/Table/Table';
 
-const columns = [{ field: 'name', headerName: 'Nome', width: 200 }];
+const columns = [{ field: 'username', headerName: 'Nome', width: 200 }];
 
 export default function UserList() {
   const [users, setUsers] = useState([]);
@@ -20,17 +20,18 @@ export default function UserList() {
   }
 
   function deleteUser() {
-    UserService.delete(selectedUser)
+    UserService.delete(selectedUser);
     setUsers(users.filter((user) => user.id !== selectedUser.id));
     setSelectedUser(null);
   }
 
+  async function fetchUsers() {
+    const users = await UserService.getAll();
+    setUsers(users);
+  }
+
   useEffect(() => fetchUsers(), []);
 
-
-  function fetchUsers() {
-    UserService.getAll().then((data) => {setUsers(data)});
-  }
   return (
     <div style={{ height: 300, width: '100%' }}>
       <Table

@@ -10,18 +10,12 @@ import Login from './Login';
 
 describe('<Login/>', () => {
   const responseResolved = {
-    data: {
-      token: '91j893h281h9nf98fnf2309jd09jkkd0as98238j9fr8j98f9j8f298r829r-f',
-      user: {
-        name: 'Daniel',
-        email: 'daniel@tw.com',
-      },
-    },
+    token: '91j893h281h9nf98fnf2309jd09jkkd0as98238j9fr8j98f9j8f298r829r-f',
   };
   const history = createMemoryHistory();
-  const authSpy = jest.spyOn(AuthService, 'loginTest');
+  const authSpy = jest.spyOn(AuthService, 'login');
   authSpy.mockResolvedValue(responseResolved);
-  const userTest = { login: 'teste@example.com', password: '12345' };
+  const userTest = { username: 'teste@example.com', password: '12345' };
   const setup = () =>
     render(
       <AuthProvider>
@@ -51,8 +45,8 @@ describe('<Login/>', () => {
   });
 
   it('Should call login with the correct credentials', async () => {
-    const { login, password } = userTest;
-    userEvent.type(screen.getByRole('textbox', { name: /Email/i }), login);
+    const { username, password } = userTest;
+    userEvent.type(screen.getByRole('textbox', { name: /Email/i }), username);
     userEvent.type(screen.getByText('Password'), password);
 
     await act(async () =>
@@ -60,26 +54,24 @@ describe('<Login/>', () => {
     );
     expect(authSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        login,
+        username,
         password,
       })
     );
   });
 
   it('Should have user credentials on localstorage', async () => {
-    const { login, password } = userTest;
-    userEvent.type(screen.getByRole('textbox', { name: /Email/i }), login);
+    const { username, password } = userTest;
+    userEvent.type(screen.getByRole('textbox', { name: /Email/i }), username);
     userEvent.type(screen.getByText('Password'), password);
 
     await act(async () =>
       userEvent.click(screen.getByRole('button', { name: /logar/i }))
     );
 
-    const storageUser = JSON.parse(window.sessionStorage.getItem('@App:user'));
     const storageToken = window.sessionStorage.getItem('@App:token');
 
-    expect(storageUser).toStrictEqual(responseResolved.data.user);
-    expect(storageToken).toStrictEqual(responseResolved.data.token);
+    expect(storageToken).toStrictEqual(responseResolved.token);
   });
 
   it('Should redirect the user to "/cadastrar" when click register button', () => {
