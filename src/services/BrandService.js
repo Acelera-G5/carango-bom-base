@@ -3,6 +3,11 @@ import { API_URL } from '../Constants';
 const BrandService = {
   create(brand) {
     return fetch(API_URL + '/marcas', {
+      contentType: 'application/json',
+      headers: {
+        Authorization: `Bearer ${window.sessionStorage.getItem('@App:token')}`,
+        'Content-Type': 'application/json',
+      },
       method: 'POST',
       body: JSON.stringify(brand),
     }).then((r) => r.json());
@@ -10,13 +15,24 @@ const BrandService = {
 
   update(brand) {
     return fetch(API_URL + '/marcas/' + brand.id, {
+      contentType: 'application/json',
+      headers: {
+        Authorization: `Bearer ${window.sessionStorage.getItem('@App:token')}`,
+        'Content-Type': 'application/json',
+      },
       method: 'PUT',
       body: JSON.stringify(brand),
     }).then((r) => r.json());
   },
 
   getById(id) {
-    return fetch(API_URL + '/marcas/' + id).then((r) => r.json());
+    return fetch(API_URL + '/marcas/' + id, {
+      contentType: 'application/json',
+      headers: {
+        Authorization: `Bearer ${window.sessionStorage.getItem('@App:token')}`,
+        'Content-Type': 'application/json',
+      },
+    }).then((r) => r.json());
   },
 
   getAll() {
@@ -25,8 +41,13 @@ const BrandService = {
 
   delete(brand) {
     return fetch(API_URL + '/marcas/' + brand.id, {
+      contentType: 'application/json',
+      headers: {
+        Authorization: `Bearer ${window.sessionStorage.getItem('@App:token')}`,
+        'Content-Type': 'application/json',
+      },
       method: 'DELETE',
-    }).then((r) => r.json());
+    });
   },
 };
 

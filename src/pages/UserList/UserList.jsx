@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import UserService from '../../services/UserService';
 
 import Table from '../../components/Table/Table';
+import './UserList.css';
 
 const columns = [{ field: 'username', headerName: 'Nome', width: 200 }];
 
@@ -33,7 +34,7 @@ export default function UserList() {
   useEffect(() => fetchUsers(), []);
 
   return (
-    <div style={{ height: 300, width: '100%' }}>
+    <div style={{ height: 300, width: '100%' }} className="userList">
       <Table
         rows={users}
         columns={columns}

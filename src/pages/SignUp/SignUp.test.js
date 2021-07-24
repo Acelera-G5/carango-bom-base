@@ -24,11 +24,8 @@ const userMock = {
   password2: '123',
 };
 
-let testLocation;
-
+const history = createMemoryHistory();
 const setup = () => {
-  const history = createMemoryHistory();
-
   return render(
     <Router history={history}>
       <SignUp />
@@ -60,6 +57,13 @@ describe('SignUp /> rendering', () => {
 
     expect(submitBtn).toBeVisible();
     expect(cancelBtn).toBeVisible();
+  });
+
+  it('Should redirect user if cancel is clicked', () => {
+    const cancelBtn = screen.getByRole('button', { name: /Cancelar/i });
+    userEvent.click(cancelBtn);
+
+    expect(history.location.pathname).toBe('/usuarios');
   });
 
   describe('<SignUp /> creating', () => {

@@ -57,7 +57,7 @@ describe('<BrandList />', () => {
     const deleteBtn = screen.getByRole('button', { name: /Excluir/i });
     const brandSelected = await screen.findByText(brandsMock[0].nome);
     userEvent.click(brandSelected);
-    userEvent.click(deleteBtn);
+    await act(async () => userEvent.click(deleteBtn));
 
     expect(brandSelected).not.toBeInTheDocument();
   });

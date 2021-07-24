@@ -21,7 +21,7 @@ export default function Table({
           rowSelectedFunction(gridSelection.data)
         }
       />
-      <div className="actionsToolbar">
+      <div className="actionsBar">
         <Button
           className="actions"
           variant="contained"

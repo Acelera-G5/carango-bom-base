@@ -30,6 +30,7 @@ function CustomDrawer({ signed }) {
   const authenticateRoutes = [
     { name: 'Marcas', path: '/marcas' },
     { name: 'Usuários', path: '/usuarios' },
+    { name: 'Veículos', path: '/veiculos' },
     { name: 'DashBoard', path: '/dashboard' },
   ];
 

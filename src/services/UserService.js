@@ -4,6 +4,8 @@ const UserService = {
   create(user) {
     return fetch(API_URL + '/users', {
       method: 'POST',
+      contentType: 'application/json',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user),
     }).then((r) => r.json());
   },
@@ -11,6 +13,8 @@ const UserService = {
   update(user) {
     return fetch(API_URL + '/users/' + user.id, {
       method: 'PUT',
+      contentType: 'application/json',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user),
     }).then((r) => r.json());
   },
@@ -26,6 +30,11 @@ const UserService = {
   delete(user) {
     return fetch(API_URL + '/users/' + user.id, {
       method: 'DELETE',
+      contentType: 'application/json',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${window.sessionStorage.getItem('@App:token')}`,
+      },
     }).then((r) => r.json());
   },
 };
