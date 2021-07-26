@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import useErros from '../../../hooks/useErros';
 import {
   Grid,
@@ -14,6 +14,7 @@ import VehicleService from '../../../services/VehicleService';
 
 function VehicleRegister() {
   const { id } = useParams();
+  const history = useHistory();
   const [brandId, setBrand] = useState('');
   const [model, setModel] = useState('');
   const [price, setPrice] = useState('');
@@ -77,8 +78,10 @@ function VehicleRegister() {
       if (possoEnviar) {
         if (id) {
           await VehicleService.update({ ...vehicle, id });
+          history.push('/veiculos');
         } else {
           await VehicleService.create(vehicle);
+          history.push('/veiculos');
         }
       }
     } catch (e) {
@@ -91,6 +94,10 @@ function VehicleRegister() {
   useEffect(() => {
     fetchVehicleById();
   }, [fetchVehicleById]);
+
+  function cancelar() {
+    history.push('/veiculos');
+  }
 
   return (
     <Grid container spacing={2}>
@@ -166,7 +173,7 @@ function VehicleRegister() {
             </Button>
           </Grid>
           <Grid item xs={6}>
-            <Button type="button" fullWidth variant="contained" color="primary">
+            <Button type="button" fullWidth variant="contained" color="primary" onClick={cancelar}>
               cancelar
             </Button>
           </Grid>
