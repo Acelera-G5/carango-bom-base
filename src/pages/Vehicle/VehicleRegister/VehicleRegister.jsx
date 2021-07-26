@@ -62,7 +62,7 @@ function VehicleRegister() {
   const fetchVehicleById = useCallback(async () => {
     if (id) {
       await VehicleService.getById(id).then((response) => {
-        setBrand(response.brand.id);
+        setBrand(response.marca.id);
         setModel(response.model);
         setPrice(response.price);
         setYear(response.year);
@@ -72,7 +72,7 @@ function VehicleRegister() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const vehicle = { brandId, model, price, year };
+    const vehicle = { marcaId: brandId, model, price, year };
     try {
       if (possoEnviar) {
         if (id) {

@@ -17,7 +17,7 @@ const vehicleMock = {
   model: 'suv',
   price: '20000',
   year: '2020',
-  brand: brands[0],
+  marca: brands[0],
 };
 
 const brandGetAllSpy = jest.spyOn(BrandService, 'getAll');
@@ -125,7 +125,7 @@ describe('<VehicleRegister />', () => {
       userEvent.type(inputVehicleModel, vehicleMock.model);
       userEvent.type(inputVehicleYear, vehicleMock.year);
       userEvent.type(inputVehicleValue, vehicleMock.price);
-      userEvent.selectOptions(brandsSelect, vehicleMock.brand.nome);
+      userEvent.selectOptions(brandsSelect, vehicleMock.marca.nome);
 
       await act(async () => userEvent.click(submitBtn));
     });
@@ -136,7 +136,7 @@ describe('<VehicleRegister />', () => {
           model: vehicleMock.model,
           year: vehicleMock.year,
           price: vehicleMock.price,
-          brandId: vehicleMock.brand.id,
+          marcaId: vehicleMock.marca.id,
         })
       );
     });
@@ -169,7 +169,7 @@ describe('<VehicleRegister /> with Spy update', () => {
     const inputVehicleYear = screen.getByRole('textbox', { name: /Ano/i });
     const inputVehicleValue = screen.getByRole('textbox', { name: /Valor/i });
 
-    expect(brandsSelect.value).toStrictEqual(vehicleMock.brand.id);
+    expect(brandsSelect.value).toStrictEqual(vehicleMock.marca.id);
     expect(inputVehicleModel.value).toStrictEqual(vehicleMock.model);
     expect(inputVehicleYear.value).toStrictEqual(vehicleMock.year);
     expect(inputVehicleValue.value).toStrictEqual(vehicleMock.price);
@@ -186,7 +186,7 @@ describe('<VehicleRegister /> with Spy update', () => {
 
     expect(vehicleUpdateSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        brandId: '1',
+        marcaId: '1',
         id: '1',
         model: 'suv',
         price: '20000',
