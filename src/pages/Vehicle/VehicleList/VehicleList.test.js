@@ -45,7 +45,7 @@ describe('<VehicleList />', () => {
     userEvent.click(updateBtn);
 
     expect(history.location.pathname).toBe(
-      '/alteracao-veiculo/' + vehiclesMock.content[0].id
+      '/veiculo/alteracao-veiculo/' + vehiclesMock.content[0].id
     );
   });
   it('Should delete item', async () => {
@@ -60,7 +60,7 @@ describe('<VehicleList />', () => {
   it('Should redirect to "cadastro-veiculo" when press "incluir" button', () => {
     const createBtn = screen.getByRole('button', { name: /Incluir/i });
     userEvent.click(createBtn);
-    expect(history.location.pathname).toBe('/cadastro-veiculo');
+    expect(history.location.pathname).toBe('/veiculo/cadastro-veiculo');
   });
   it('Should render list lines', async () => {
     expect(

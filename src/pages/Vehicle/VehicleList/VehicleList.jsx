@@ -20,11 +20,11 @@ function VehicleList() {
   const { signed } = useAuth();
 
   function create() {
-    history.push('/cadastro-veiculo');
+    history.push('/veiculo/cadastro-veiculo');
   }
 
   function update() {
-    history.push('/alteracao-veiculo/' + selectedVehicle.id);
+    history.push('/veiculo/alteracao-veiculo/' + selectedVehicle.id);
   }
 
   function deleteVehicle() {
